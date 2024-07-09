@@ -8,6 +8,7 @@ const {
   softDeleteUser,
   updateUser,
   listUsers,
+  getUserFollowers,
 } = require("../controllers/userController");
 const {
   validateUserRequest,
@@ -18,6 +19,7 @@ router.post("/", validateUserRequest, saveUser);
 router.post("/:username/friends", findMutualFollowers);
 router.get("/search", searchUsers);
 router.delete("/:username", softDeleteUser);
+router.get("/:username/followers", getUserFollowers);
 router.put("/:username", validateUpdateRequest, updateUser);
 router.get("/:username/repos", getUserRepositories);
 router.get("/", listUsers);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { fetchUserRepos } from "../services/apiService";
 import "../../src/styles/UserRepos.css";
 
 const UserRepos = () => {
@@ -14,9 +14,7 @@ const UserRepos = () => {
   useEffect(() => {
     const fetchRepositories = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/user/${username}/repos`
-        );
+        const response = await fetchUserRepos(username);
         setRepositories(response.data);
         setLoading(false);
       } catch (error) {

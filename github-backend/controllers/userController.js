@@ -48,6 +48,20 @@ const saveUser = async (req, res, next) => {
   }
 };
 
+const getUserFollowers = async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    const response = await axios.get(
+      `https://api.github.com/users/${username}/followers`
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching GitHub followers:", error.message);
+    res.status(500).json({ error: "Failed to fetch followers" });
+  }
+};
+
 const findMutualFollowers = async (req, res, next) => {
   const { username } = req.params;
 
@@ -113,4 +127,5 @@ module.exports = {
   softDeleteUser,
   updateUser,
   listUsers,
+  getUserFollowers,
 };

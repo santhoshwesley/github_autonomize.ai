@@ -9,8 +9,12 @@ const FollowersList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetchUserFollowers(username);
-      setFollowers(response.data);
+      try {
+        const response = await fetchUserFollowers(username);
+        setFollowers(response.data);
+      } catch (error) {
+        console.error("Error fetching followers:", error.message);
+      }
     };
 
     fetchData();

@@ -5,8 +5,8 @@ const api = axios.create({
 });
 
 export const fetchUserData = (username) => api.get(`/users/${username}`);
-export const fetchUserRepos = (username) => api.get(`/users/${username}/repos`);
+export const fetchUserRepos = (username) => api.get(`/user/${username}/repos`);
 export const fetchRepoDetails = (username, reponame) =>
   api.get(`/repos/${username}/${reponame}`);
 export const fetchUserFollowers = (username) =>
-  api.get(`/users/${username}/followers`);
+  api.get(`/user/${username}/followers`);
