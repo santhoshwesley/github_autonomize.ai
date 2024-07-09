@@ -1,85 +1,29 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import "../../src/styles/UserRepos.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../src/styles/UserSearch.css";
 
-const UserRepos = () => {
-  const [repositories, setRepositories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const { username } = useParams();
+const UserSearch = () => {
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchRepositories = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/user/${username}/repos`
-        );
-        setRepositories(response.data);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-
-    fetchRepositories();
-  }, [username]);
-
-  if (loading) {
-    return <p className="loading-message">Loading repositories...</p>;
-  }
-
-  if (error) {
-    return (
-      <p className="error-message">Error fetching repositories: {error}</p>
-    );
-  }
-
-  if (repositories.length === 0) {
-    return (
-      <p className="no-repos-message">No repositories found for {username}.</p>
-    );
-  }
+  const handleSearch = () => {
+    navigate(`/user/${username}/repos`);
+  };
 
   return (
-    <div className="user-repos-container">
-      <h2 className="repo-header">Repositories for {username}</h2>
-      <button
-        className="followers-button"
-        onClick={() => navigate(`/user/${username}/followers`)}
-      >
-        View Followers
+    <div className="user-search-container">
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="user-search-input"
+        placeholder="Enter GitHub username"
+      />
+      <button onClick={handleSearch} className="user-search-button">
+        Search
       </button>
-      <button className="search-button" onClick={() => navigate(`/`)}>
-        Back to Search
-      </button>
-      <ul className="user-repo-list">
-        {repositories.map((repo, index) => (
-          <li key={index} className="user-repo-card">
-            {repo.owner && repo.owner.avatar_url && (
-              <img
-                src={repo.owner.avatar_url}
-                alt={`${repo.owner.login} avatar`}
-                className="repo-avatar"
-              />
-            )}
-            <div className="user-repo-details">
-              <Link
-                to={`/repo/${username}/${repo.name}`}
-                className="user-repo-name"
-              >
-                {repo.name}
-              </Link>
-              <p className="user-repo-description">{repo.description}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
 
-export default UserRepos;
+export default UserSearch;

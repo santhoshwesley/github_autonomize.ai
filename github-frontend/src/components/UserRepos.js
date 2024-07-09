@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "../../src/styles/UserRepos.css";
 
 const UserRepos = () => {
@@ -9,6 +9,7 @@ const UserRepos = () => {
   const [error, setError] = useState(null);
 
   const { username } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRepositories = async () => {
@@ -16,7 +17,6 @@ const UserRepos = () => {
         const response = await axios.get(
           `http://localhost:5000/user/${username}/repos`
         );
-        console.log(response);
         setRepositories(response.data);
         setLoading(false);
       } catch (error) {
@@ -47,6 +47,15 @@ const UserRepos = () => {
   return (
     <div className="user-repos-container">
       <h2 className="repo-header">Repositories for {username}</h2>
+      <button
+        className="followers-button"
+        onClick={() => navigate(`/user/${username}/followers`)}
+      >
+        View Followers
+      </button>
+      <button className="search-button" onClick={() => navigate(`/`)}>
+        Back to Search
+      </button>
       <ul className="user-repo-list">
         {repositories.map((repo, index) => (
           <li key={index} className="user-repo-card">
