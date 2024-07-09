@@ -1,0 +1,100 @@
+.user-repos-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.repo-header {
+  color: #162f95;
+}
+
+.user-repo-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-repo-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+}
+
+.user-repo-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-right: 15px;
+}
+
+.user-repo-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-repo-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.user-repo-description {
+  font-size: 14px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.user-repo-name:hover {
+  text-decoration: underline;
+}
+
+.loading-message,
+.error-message,
+.no-repos-message {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}
+
+.error-message {
+  color: #ff0000;
+}
+
+.no-repos-message {
+  color: #007bff;
+}
+.followers-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.followers-button:hover {
+  background-color: #0056b3;
+}
+.search-button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.search-button:hover {
+  background-color: #218838;
+}
